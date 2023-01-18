@@ -67,10 +67,10 @@ export default function Home() {
             rel="noopener noreferrer"
           >
             <h2 className={inter.className}>
-              Docs <span>-&gt;</span>
+              Text Here <span>-&gt;</span>
             </h2>
             <p className={inter.className}>
-              Find in-depth information about Next.js features and&nbsp;API.
+              Woo!
             </p>
           </a>
 
@@ -81,10 +81,10 @@ export default function Home() {
             rel="noopener noreferrer"
           >
             <h2 className={inter.className}>
-              Learn <span>-&gt;</span>
+              Nice <span>-&gt;</span>
             </h2>
             <p className={inter.className}>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
+              cool
             </p>
           </a>
 
