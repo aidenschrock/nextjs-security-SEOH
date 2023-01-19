@@ -1,5 +1,24 @@
-// import { NextRequest, NextResponse } from "next/server";
-// import { get } from "@vercel/edge-config";
+import { NextRequest, NextResponse } from "next/server";
+import { get } from "@vercel/edge-config";
+import { createClient } from "@vercel/edge-config";
+
+export async function middleware(NextRequest) {
+  if (!process.env.EDGE_CONFIG) {
+    return NextResponse.status(200).json({
+      message: "Edge Config not configured",
+    });
+  }
+
+  const edgeStore = createClient(process.env.EDGE_CONFIG);
+  const denyIpAddrs = await edgeStore.get("ip_addrs");
+  const currIp = NextRequest.ip;
+
+  if (denyIpAddrs.some((e) => e.includes(currIp))) {
+    return NextResponse.status(200).json({
+      message: "BLOCKED GG",
+    });
+  }
+}
 
 // export async function middleware(NextRequest) {
 //   if (!process.env.EDGE_CONFIG) {
