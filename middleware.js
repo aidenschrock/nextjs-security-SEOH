@@ -11,7 +11,7 @@ export async function middleware() {
   const edgeStore = createClient(process.env.EDGE_CONFIG);
   const denyIpAddrs = await edgeStore.get("ip_addrs");
   const currIp = NextRequest.ip;
-
+  console.log(currIp);
   if (denyIpAddrs.includes(currIp)) {
     return NextResponse.json({
       message: "BLOCKED GG",
