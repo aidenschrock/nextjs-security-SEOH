@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@vercel/edge-config";
 
-export async function middleware(NextRequest, NextResponse) {
+export async function middleware() {
   if (!process.env.EDGE_CONFIG) {
-    return NextResponse.status(500).json({
+    return NextResponse.json({
       message: "Edge Config not configured",
     });
   }
@@ -13,11 +13,11 @@ export async function middleware(NextRequest, NextResponse) {
   const currIp = NextRequest.ip;
 
   if (denyIpAddrs.includes(currIp)) {
-    return NextResponse.status(200).json({
+    return NextResponse.json({
       message: "BLOCKED GG",
     });
   } else {
-    return NextResponse.status(200).json({
+    return NextResponse.json({
       message: "You're allowed",
     });
   }
