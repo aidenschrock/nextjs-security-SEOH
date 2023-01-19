@@ -3,21 +3,21 @@ import { createClient } from "@vercel/edge-config";
 
 export async function middleware(NextRequest, NextResponse) {
   if (!process.env.EDGE_CONFIG) {
-    return res.status(500).json({
+    return NextResponse.status(500).json({
       message: "Edge Config not configured",
     });
   }
 
   const edgeStore = createClient(process.env.EDGE_CONFIG);
   const denyIpAddrs = await edgeStore.get("ip_addrs");
-  const currIp = req.ip;
+  const currIp = NextRequest.ip;
 
   if (denyIpAddrs.includes(currIp)) {
-    return res.status(200).json({
+    return NextResponse.status(200).json({
       message: "BLOCKED GG",
     });
   } else {
-    return res.status(200).json({
+    return NextResponse.status(200).json({
       message: "You're allowed",
     });
   }
